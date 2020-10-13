@@ -11,5 +11,5 @@ app.use('/images', express.static(__dirname + '/public/images'));
 
 var server = app.listen(9005, function(){
     var port = server.address().port;
-    console.log("Server started at http://localhost:%s", port);
+    console.log("Server started at http://54.169.252.162:%s", port);
 });
