@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-applicaton-with-docker",
+  "name": "nodejs-docker",
   "version": "1.0.0",
-  "description": "Selftuts",
+  "description": "Mahmud",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +10,6 @@
   "dependencies": {
     "express": "^4.16.3"
   },
-  "author": "Raj Ranjan",
+  "author": "Mahmud",
   "license": "ISC"
 }
