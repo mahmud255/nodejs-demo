@@ -1,19 +1,15 @@
-FROM alpine:latest
-RUN apk add --no-cache nodejs npm
+FROM node
+RUN yum update -y
 
-
+RUN mkdir /app
 WORKDIR /app
 
+COPY package.json /app/
+RUN npm install --only-production
 
-COPY . /app
 
-
-RUN npm install
-
+COPY src /app/src
 
 EXPOSE 3000
 
-
-ENTRYPOINT ["node"]
-
-CMD ["server.js"]
+CMD ["npm", "start"]
