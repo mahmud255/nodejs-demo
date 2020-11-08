@@ -1,39 +1,71 @@
-node {
-   /* env.AWS_ECR_LOGIN=false
-    def newApp
-    def registry = 'mrsvg/nodejs-docker'
-    def registryCredential = 'dockerhub'
-	
-	stage('Git') {
-		git 'mrsvg/nodejs-docker'
-	}
-	stage('Build') {
-		sh 'npm install'
-	}
-	stage('Test') {
-		sh 'npm test'
-	}
-	stage('Building image') {
-        docker.withRegistry( 'https://' + registry, registryCredential ) {
-		    def buildName = registry + ":$BUILD_NUMBER"
-			newApp = docker.build buildName
-			newApp.push()
+pipeline { 
+2
+    environment { 
+3
+        registry = "mrsvg/nodejs-docker" 
+4
+        registryCredential = 'mrsvg' 
+5
+        dockerImage = '' 
+6
+    }
+7
+    agent any 
+8
+    stages { 
+9
+        stage('Cloning our Git') { 
+10
+            steps { 
+11
+                git 'https://github.com/mrsvg/nodejs-demo.git' 
+12
+            }
+13
+        } 
+14
+        stage('Building our image') { 
+15
+            steps { 
+16
+                script { 
+17
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+18
+                }
+19
+            } 
+20
         }
-	}
-	stage('Registring image') {
-        docker.withRegistry( 'https://' + registry, registryCredential ) {
-    		newApp.push 'latest2'
-        }
-	}
-    stage('Removing image') {
-        sh "docker rmi $registry:$BUILD_NUMBER"
-        sh "docker rmi $registry:latest"
-    }*/
-	stage('display folders') {
-	 dh = new File('.')
-    	 dh.eachFile {
-         println(it)
-    	}
-	}
-    
+21
+        stage('Deploy our image') { 
+22
+            steps { 
+23
+                script { 
+24
+                    docker.withRegistry( '', registryCredential ) { 
+25
+                        dockerImage.push() 
+26
+                    }
+27
+                } 
+28
+            }
+29
+        } 
+30
+        stage('Cleaning up') { 
+31
+            steps { 
+32
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+33
+            }
+34
+        } 
+35
+    }
+36
 }
