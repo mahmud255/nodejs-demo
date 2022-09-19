@@ -1,5 +1,5 @@
 FROM node
-RUN yum update -y
+RUN apt update -y
 
 RUN mkdir /app
 WORKDIR /app
