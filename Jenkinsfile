@@ -2,9 +2,9 @@ pipeline {
 2
     environment { 
 3
-        registry = "mrsvg/nodejs-docker" 
+        registry = "mahmud255/nodejs-docker" 
 4
-        registryCredential = 'mrsvg' 
+        registryCredential = 'docker' 
 5
         dockerImage = '' 
 6
@@ -18,7 +18,7 @@ pipeline {
 10
             steps { 
 11
-                git 'https://github.com/mrsvg/nodejs-demo.git' 
+                git 'https://github.com/mahmud255/nodejs-demo.git' 
 12
             }
 13
